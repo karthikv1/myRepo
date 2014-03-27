@@ -1,0 +1,103 @@
+package linkedImpl;
+
+public class Linked {
+	private static Node head, tail;
+	
+	private class Node{
+		String item;
+		Node next;
+	}
+	
+	}
+	
+	public Linked(){
+		Node N = new Node();
+		Node N2 = new Node();
+		N.item = "Tail Element";
+		N2.item = "Head Element";
+		tail = N;
+		head = N2;
+		head.next = tail;
+		/*N.item = tail.item;
+		N.next = null;
+		tail = N;
+		N2 = head;
+		N2.next = tail;*/
+		
+	}
+	public boolean insertAfter(Node elem, String data){
+		Node temp = new Node();
+		temp.item = data;
+		if(head==null && tail !=null){
+			temp.next = tail;
+			return true;
+		}
+		if(tail == null){
+			tail = temp;
+			tail.next = null;
+			return true;
+		}
+		Node currPos = head;
+		while(currPos!= null){
+			if(currPos == elem){
+				temp.next = currPos.next;
+				currPos.next = temp;
+				if(currPos.next == null){
+					tail = temp;
+				}
+				return true;
+				
+			}
+			currPos = currPos.next;
+		}
+		
+		return false;
+	}
+	
+	public boolean remove(Node elem){
+		Node currPos = new Node();
+		if(elem==null) return false;
+		if(elem == head) {
+			head = elem.next;
+			return true;
+		}
+		if(head==null){
+			tail = null;
+			return true;
+		}
+			
+		
+		while (currPos!=null){
+			
+			if(currPos.next==elem){
+				currPos = currPos.next;
+				if(currPos.next==null)
+					tail = currPos;
+				return true;
+			}
+			if(currPos.next == tail){
+				tail = currPos;
+				currPos.next = null;
+				return true;
+			}
+			currPos = currPos.next;
+		}
+		return false;
+		
+	}
+	public static void main(String[] args) {
+		Linked ln = new Linked();
+		ln.insertAfter(head, "Adding Element");
+		ln.remove(head);
+		System.out.println(head.item);
+		System.out.println(tail.item);
+		Node currpos = head;
+		while(currpos!=null){
+			System.out.println(currpos.item);
+			currpos = currpos.next;
+			
+		}
+
+	
+
+}
