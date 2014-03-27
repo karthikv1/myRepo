@@ -1,0 +1,39 @@
+package ArrayResize;
+
+public class ArraySize {
+	private String []arr = new String[2];
+	private int N;
+	public void insertElement(String S){
+		if(N==0 || N==arr.length/4 || N==arr.length) resize(2*arr.length);
+		arr[N++] = S;
+				
+	}
+	public void resize(int capacity){
+		String []newArr = new String[capacity];
+		for(int i=0;i<N;i++)
+			newArr[i] = arr[i];
+		arr = newArr;
+	}
+	public String removeElement(){
+		String item = arr[N-1];
+		arr[N-1]= null;
+		N--;
+		if(N>0 && N==arr.length/4) resize(2*arr.length/2);
+		return item;
+	}
+	public void display(){
+		for(int i=0;i<N;i++)
+			System.out.println(arr[i]);
+		System.out.println(N);
+	}
+	
+	public static void main(String[] args) {
+		ArraySize as = new ArraySize();
+		as.insertElement("First");
+		as.insertElement("Second");
+		as.display();
+		String s = as.removeElement();
+		System.out.println(s);
+
+	}
+}
